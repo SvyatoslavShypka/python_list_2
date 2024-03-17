@@ -12,7 +12,7 @@ def suma(lines):
         if data[indeks] != '-':
             sum += int(data[indeks])
 
-    return str(sum/(1024*1024))
+    return str(sum/(1024*1024*1024))
 
 
 if __name__ == '__main__':

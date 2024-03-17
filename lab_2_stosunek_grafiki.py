@@ -14,7 +14,7 @@ def stosunek_grafiki(lines):
         indeks = len(data) - 2
         if data[indeks] == '200':
             wszystkie += 1
-            check = re.search("\\.(gif)|(jpe*g)|(xbm)", line)
+            check = re.search("\\.(gif)|(jpe?g)|(xbm)", line)
             if check:
                 grafika += 1
     stosunek_procent = round(grafika / wszystkie * 100, 2)

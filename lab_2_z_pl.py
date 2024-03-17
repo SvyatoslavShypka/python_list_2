@@ -11,7 +11,7 @@ def wierszy_code(lines):
         if len(data) < 8:
             raise RuntimeError("Nieprawidlowe dane")
         indeks = len(data) - 2
-        if data[indeks] == '202':
+        if data[indeks] == '302':
             if data[0].endswith(".pl"):
                 result.append(line)
     return result
