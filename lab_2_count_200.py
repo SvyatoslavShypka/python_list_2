@@ -4,9 +4,10 @@ import fileinput
 
 def is_code_200(line):
     data = line.split()
-    if len(data) < 10:
+    # print(data)
+    if len(data) < 8:
         raise RuntimeError("Nieprawidlowe dane")
-    return data[8] == '200'
+    return data[len(data) - 2] == '200'
 
 
 if __name__ == '__main__':
@@ -16,10 +17,11 @@ if __name__ == '__main__':
     processed_output = []
     for fileinput_line in fileinput.input():
         fileinput_line = fileinput_line.rstrip().lstrip('\ufeff')
-        if is_code_200(fileinput_line):
-            count += 1
+        # print(fileinput_line)
         if 'Exit' == fileinput_line.rstrip():
             break
+        if is_code_200(fileinput_line):
+            count += 1
     processed_output.append(str(count))
     # Złączamy w jeden String
     processed_text = '\n'.join(processed_output)
