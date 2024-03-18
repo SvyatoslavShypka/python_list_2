@@ -10,6 +10,8 @@ def wierszy(lines):
         if len(data) < 8:
             raise RuntimeError("Nieprawidlowe dane")
         indeks = len(data) - 2
+        # kontrola po kodu 200 gdy wtedy odbywalo sie pobranie zasobu
+        # inne statusy nie doprowadzaja do pobrania zasobu lub pobieraja z cache
         if data[indeks] == '200':
             dzien = data[3][1:12]
             # na date 07/Jul/1995
