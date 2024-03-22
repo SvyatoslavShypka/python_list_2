@@ -1,19 +1,19 @@
 import sys
 
 
-def wierszy_code(lines, date):
+def wierszy_godziny(lines, godzina_od, godzina_do):
     result = []
     for line in lines:
         line = line.rstrip().lstrip('\ufeff')
-        # print(line)
         data = line.split()
-        # print(data)
         if len(data) < 8:
             raise RuntimeError("Nieprawidlowe dane")
-        dzien = data[3][1:12]
-        # if dzien == "07/Jul/1995":
-        if dzien == date:
-            result.append(line)
+        indeks = len(data) - 2
+        if data[indeks] == '200':
+            godzina = int(data[3][-8: -6])
+            # pomiedzy 22 a 6 godzina
+            if godzina_od <= godzina or godzina < godzina_do:
+                result.append(line)
     return result
 
 
@@ -29,8 +29,9 @@ def input_data():
 
 def process_code():
     lines = input_data()
-    date = sys.argv[1]
-    processed_output = wierszy_code(lines, date)
+    godzina_od = int(sys.argv[1])
+    godzina_do = int(sys.argv[2])
+    processed_output = wierszy_godziny(lines, godzina_od, godzina_do)
     # Złączamy w jeden String
     processed_text = '\n'.join(processed_output)
     # Wyprowadzamy na stdout
@@ -38,6 +39,6 @@ def process_code():
 
 
 if __name__ == '__main__':
-    if len(sys.argv) < 1:
+    if len(sys.argv) < 2:
         raise RuntimeError("Brak danych")
     process_code()

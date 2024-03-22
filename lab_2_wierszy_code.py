@@ -1,7 +1,7 @@
 import sys
 
 
-def wierszy_code(lines, date):
+def wierszy_code(lines, code):
     result = []
     for line in lines:
         line = line.rstrip().lstrip('\ufeff')
@@ -10,9 +10,8 @@ def wierszy_code(lines, date):
         # print(data)
         if len(data) < 8:
             raise RuntimeError("Nieprawidlowe dane")
-        dzien = data[3][1:12]
-        # if dzien == "07/Jul/1995":
-        if dzien == date:
+        indeks = len(data) - 2
+        if data[indeks] == code:
             result.append(line)
     return result
 
@@ -29,8 +28,8 @@ def input_data():
 
 def process_code():
     lines = input_data()
-    date = sys.argv[1]
-    processed_output = wierszy_code(lines, date)
+    code = sys.argv[1]
+    processed_output = wierszy_code(lines, code)
     # Złączamy w jeden String
     processed_text = '\n'.join(processed_output)
     # Wyprowadzamy na stdout
